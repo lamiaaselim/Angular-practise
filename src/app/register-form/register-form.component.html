@@ -1,0 +1,39 @@
+<form class="container py-5" #registerForm="ngForm" novalidate (ngSubmit)="onRegister()">
+  {{registerForm.value|json}}
+  <div class="mb-3">
+    <label for="username" class="form-label">User Name</label>
+    <input type="text" required [class.is-invalid] = "username.invalid && username.touched"
+    [(ngModel)]="registerModel.username" class="form-control" #username="ngModel" name="username"
+    pattern="[A-Za-z]+">
+    <small class="text-danger" *ngIf="username.invalid && username.touched">Username required and must contain only capital and small letters</small>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email" required [class.is-invalid] = "email.invalid && email.touched"
+    [(ngModel)]="registerModel.email" class="form-control" #email="ngModel" name="exampleInputEmail1"
+    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" aria-describedby="emailHelp">
+    <small class="text-danger" *ngIf="email.invalid && email.touched">Please enter a valid email address</small>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input type="password" required [class.is-invalid] = "password.invalid && password.touched"
+    [(ngModel)]="registerModel.password" class="form-control" #password="ngModel" name="exampleInputPassword1">
+  </div>
+  <div class="mb-3">
+    <label for="confirmPassword" class="form-label">Confirm Password</label>
+  <input type="password" required [(ngModel)]="registerModel.confirmPassword" class="form-control" name="confirmPassword"
+    #confirmPassword="ngModel" [class.is-invalid]="confirmPassword.invalid && confirmPassword.touched"
+    [ngClass]="{'is-invalid': confirmPassword.value !== registerModel.password && confirmPassword.touched}">
+  <small class="text-danger" *ngIf="confirmPassword.value !== registerModel.password && confirmPassword.touched">
+    Passwords do not match
+  </small>
+  </div>
+  <div class="form-group mb-3">
+    <select class="form-select" required [class.is-invalid] = "website.invalid && website.touched"
+    [(ngModel)]="registerModel.website" #website="ngModel" name="inputGroupSelect02">
+      <option>Where you hear about us ?</option>
+      <option *ngFor="let website of websites">{{website}}</option>
+    </select>
+  </div>
+  <input type="submit" value=" Register "  [disabled]="registerForm.form.invalid" class="btn btn-primary">
+</form>

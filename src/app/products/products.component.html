@@ -1,0 +1,51 @@
+
+<h1> Storename: {{StoreName | uppercase }}</h1>
+
+
+<!-- <img [src]="ProductList.Img" alt="picture"/> -->
+<!-- <img [src]="products[0].Img" alt="picture"/> -->
+
+<img [src]="products[0]?.Img" alt="picture"/>
+
+<h3 *ngIf="nodiscount" > We offer an explicit discount of: {{Discount | percent}} </h3>
+
+<label for="categories ">Choose a Categories:</label>
+<select name="categories " id="categories">
+  <option *ngFor="let item of CategoryList" value="">{{item.name}}</option>
+</select>
+<h5> Enter your name</h5>
+<input [(ngModel)]="ClientName" type="text"/>
+<br>
+{{ClientName}}
+<br>
+<button (click)="renderValues()"> Show Product </button>
+
+<div *ngIf="!isPurchased">
+  <h1>Product</h1>
+<table style="border: 1px solid black;">
+  <tr>
+    <td style="border: 1px solid black;" *ngFor="let product of products">{{product.Id}}</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid black;" *ngFor="let product of products">{{product.Name}}</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid black;" *ngFor="let product of products">{{product.Discount}}</td>
+  </tr>
+</table>
+<br>
+
+<div>
+  <button (click)="navigateToDiscountedProducts()">Products with Discount</button> &nbsp;&nbsp;
+  <button (click)="navigateToNonDiscountedProducts()">Products without Discount</button>
+</div>
+<!-- <h3 *ngIf="nodiscount" > We offer an explicit discount of: {{Discount | percent}} </h3> -->
+
+<router-outlet></router-outlet>
+</div>
+<button (click)="buy()">Buy</button>
+<div *ngIf="isPurchased">
+  <div>
+    Thanks for purchasing from our Store, {{ ClientName }}!
+  </div>
+</div>

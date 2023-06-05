@@ -1,0 +1,6 @@
+<h2>Comments for Post ID: {{ postId }}</h2>
+
+<div class="card card-body my-3" *ngFor="let comment of comments">
+  <h4>{{ comment.name }}</h4>
+  <p>{{ comment.body }}</p>
+</div>

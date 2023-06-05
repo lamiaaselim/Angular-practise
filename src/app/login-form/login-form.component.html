@@ -1,0 +1,20 @@
+<form class="container py-5" #loginForm="ngForm" novalidate (ngSubmit)="onLogin()">
+  {{loginForm.value|json}}
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email"required [class.is-invalid] = "email.invalid && email.touched"
+    [(ngModel)]="loginModel.email" class="form-control" #email="ngModel" name="exampleInputEmail1" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input type="password" required [class.is-invalid] = "password.invalid && password.touched"
+    [(ngModel)]="loginModel.password" class="form-control" #password="ngModel"  name="exampleInputPassword1">
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" required [class.is-invalid] = "checked.invalid && checked.touched"
+    [(ngModel)]="loginModel.checked" #checked="ngModel" name="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <input type="submit" value=" Login "  [disabled]="loginForm.form.invalid" class="btn btn-primary">
+</form>
